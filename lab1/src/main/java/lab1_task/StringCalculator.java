@@ -30,7 +30,12 @@ public class StringCalculator {
             try
             {
                 if (Integer.parseInt(i) >= 0) {
-                    sum += Integer.parseInt(i);
+                    if (Integer.parseInt(i) <= 1000) {
+                        sum += Integer.parseInt(i);
+                    }
+                    else {
+                        System.out.println(Integer.parseInt(i) + " > 1000");
+                    }
                 }
                 else {
                     neg_numb[list_cur] = Integer.parseInt(i);

@@ -49,5 +49,13 @@ public class StringCalculatorTest {
         Assertions.assertEquals(8, Calc.add("-4554,3,-5,---3,35t,5"));
 
     }
+    @Test
+    void LessThanThousand() {
+        System.out.println("~TEST LessThanThousand~");
+        StringCalculator Calc = new StringCalculator();
+
+        Assertions.assertEquals(40, Calc.add("13232,40"));
+
+    }
 
 }
