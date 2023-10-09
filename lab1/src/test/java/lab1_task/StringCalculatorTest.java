@@ -36,8 +36,8 @@ public class StringCalculatorTest {
         System.out.println("~TEST NewSeparator~");
         StringCalculator Calc = new StringCalculator();
 
-        Assertions.assertEquals(27, Calc.add("//#\\n4#23"));
-        Assertions.assertEquals(70, Calc.add("//#\\n4#23,43"));
+        Assertions.assertEquals(27, Calc.add("//[#]\\n4#23"));
+        Assertions.assertEquals(70, Calc.add("//[#]\\n4#23,43"));
         Assertions.assertEquals(39, Calc.add("//435,34,5"));
     }
 
