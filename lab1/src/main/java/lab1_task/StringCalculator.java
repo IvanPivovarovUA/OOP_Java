@@ -4,6 +4,15 @@ public class StringCalculator {
 
     public int add(String numbers) {
         int sum = 0;
+        int neg_numb[];
+        if (numbers.length() < 30) {
+            neg_numb = new int[numbers.length()];
+        }
+        else {
+            neg_numb = new int[30];
+        }
+        
+        int list_cur = 0;
 
         String new_sep = "";
         String new_num = numbers;
@@ -20,14 +29,28 @@ public class StringCalculator {
         for (String i: string_numbers) {
             try
             {
-                sum += Integer.parseInt(i);
+                if (Integer.parseInt(i) >= 0) {
+                    sum += Integer.parseInt(i);
+                }
+                else {
+                    neg_numb[list_cur] = Integer.parseInt(i);
+                    list_cur += 1;
+                    System.out.println("Negative numbers are not allowed:" + Integer.parseInt(i));
+                }
             }
             catch (NumberFormatException nfe)
             {
                 System.out.println("NumberFormatException: " + nfe.getMessage());
             }
         }
-
+        
+        if (list_cur != 0) {
+            System.out.print("Negative numbers: (");
+            for (int i = 0 ;i < list_cur-1; i++) {
+                System.out.print(neg_numb[i] + ",");
+            }
+            System.out.println(neg_numb[list_cur-1] + ")");
+        }
         return sum;
     }
 

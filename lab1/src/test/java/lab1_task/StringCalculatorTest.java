@@ -41,4 +41,13 @@ public class StringCalculatorTest {
         Assertions.assertEquals(39, Calc.add("//435,34,5"));
     }
 
+    @Test
+    void NegativeNumbersNotAllowed() {
+        System.out.println("~TEST NegativeNumbersNotAllowed~");
+        StringCalculator Calc = new StringCalculator();
+
+        Assertions.assertEquals(8, Calc.add("-4554,3,-5,---3,35t,5"));
+
+    }
+
 }
