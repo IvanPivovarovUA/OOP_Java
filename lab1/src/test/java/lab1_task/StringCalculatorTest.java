@@ -58,4 +58,13 @@ public class StringCalculatorTest {
 
     }
 
+    @Test
+    void DifferentSeparator() {
+        System.out.println("~TEST DifferentSeparator~");
+        StringCalculator Calc = new StringCalculator();
+
+        Assertions.assertEquals(174, Calc.add("//[^][dfhdh[#][^^^][][*]\\n44,22^11#44,53,rf"));
+
+    }
+
 }

@@ -16,14 +16,14 @@ public class StringCalculator {
 
         String new_sep = "";
         String new_num = numbers;
-        if (numbers.length() > 2 && numbers.indexOf("]\\n") > 2)
+        if (numbers.length() > 2 && numbers.indexOf("\\n") > 2)
         {
-            if (numbers.charAt(0) == '/' && numbers.charAt(1) == '/' && numbers.charAt(2) == '[') {
+            if (numbers.charAt(0) == '/' && numbers.charAt(1) == '/') {
                 new_sep = cut_separato(numbers);
                 new_num = cut_number(numbers);
             }
         }
-        System.out.println("{" + new_sep + "}~{" + new_num + "}");
+        System.out.println("{" + ",|\\\\n" + new_sep + "}~{" + new_num + "}");
 
         String string_numbers[] = new_num.split(",|\\\\n" + new_sep);
         for (String i: string_numbers) {
@@ -61,16 +61,38 @@ public class StringCalculator {
 
 
     String cut_separato(String user_string) {
-        String new_sep = user_string.substring(
-            3,
-            user_string.indexOf("]\\n")
+        String new_sep = "";
+        String sep_blocks = user_string.substring(
+            2,
+            user_string.indexOf("\\n")
         );
-        new_sep = "|\\Q" + new_sep + "\\E";
+        String string_sep[] = sep_blocks.split("\\Q[\\E");
+
+
+        if (string_sep[0].equals("")) {
+            System.out.println("You made mistake here: \"[" + string_sep[0] + "\" - i will not use it.");
+        }
+        for (int i = 1; i < string_sep.length; i++) {
+            if (string_sep[i].equals("]") || string_sep[i].equals("")){
+                System.out.println("You made mistake here: \"[" + string_sep[i] + "\" - i will not use it.");
+            }
+            else {
+                if (string_sep[i].charAt(string_sep[i].length()-1) == ']') {
+                    new_sep = new_sep + "|\\Q" + string_sep[i].substring(0,string_sep[i].length()-1) + "\\E";
+                }
+                else {
+                    System.out.println("You made mistake here: \"[" + string_sep[i] + "\" - i will not use it."); 
+                } 
+            }
+     
+
+        }
+
         return new_sep;
     }
     String cut_number(String user_string) {
         String new_num = user_string.substring(
-            user_string.indexOf("]\\n") + 3,
+            user_string.indexOf("\\n") + 2,
             user_string.length()
         );
         return new_num;
