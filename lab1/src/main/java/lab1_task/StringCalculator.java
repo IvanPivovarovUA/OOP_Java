@@ -61,6 +61,10 @@ public class StringCalculator {
 
 
     String cut_separato(String user_string) {
+        String input_sep[] = new String[user_string.length()];
+        int fill_arr_cur = 0;
+
+
         String new_sep = "";
         String sep_blocks = user_string.substring(
             2,
@@ -78,14 +82,28 @@ public class StringCalculator {
             }
             else {
                 if (string_sep[i].charAt(string_sep[i].length()-1) == ']') {
-                    new_sep = new_sep + "|\\Q" + string_sep[i].substring(0,string_sep[i].length()-1) + "\\E";
+                    // new_sep = new_sep + "|\\Q" + string_sep[i].substring(0,string_sep[i].length()-1) + "\\E";
+                    input_sep[fill_arr_cur] = string_sep[i].substring(0,string_sep[i].length()-1);
+                    fill_arr_cur++;
                 }
                 else {
                     System.out.println("You made mistake here: \"[" + string_sep[i] + "\" - i will not use it."); 
                 } 
             }
-     
+        }
 
+        for (int i = 0; i < fill_arr_cur; i++) {
+            for (int j = 0; j < fill_arr_cur - 1; j++) {
+                if (input_sep[j].length() < input_sep[j + 1].length()) {
+                    String str_for_moment = input_sep[j];
+                    input_sep[j] = input_sep[j + 1];
+                    input_sep[j + 1] = str_for_moment;     
+                }
+            }
+        }
+        for (int i = 0; i < fill_arr_cur; i++) {
+            new_sep = new_sep + "|\\Q" + input_sep[i] + "\\E";
+            // System.out.println("Hi + " + input_sep[i]);
         }
 
         return new_sep;
