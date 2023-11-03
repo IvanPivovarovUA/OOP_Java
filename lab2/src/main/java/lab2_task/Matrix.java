@@ -18,8 +18,8 @@ public class Matrix {
         }else {
             System.out.println("\n[]\n");
         }
-
     }
+
 
     Matrix() {
         Elements = new ArrayList<ArrayList<Integer>>();
@@ -83,18 +83,20 @@ public class Matrix {
             }
 
             Elements = new ArrayList<ArrayList<Integer>>();
+            if (row != 0 && column != 0) {
+                for (int c=0; c < column; c++) {
+                    Elements.add(new ArrayList<Integer>());
 
-            for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
-
-                for (int r=0; r < row; r++) {
-                    System.out.print("Set element " + "[" + (r + 1) + "," + (c + 1) + "] :");
-                    int number = Integer.parseInt(
-                        user_input.nextLine()
-                    );
-                    Elements.get(c).add(number);
-                }
+                    for (int r=0; r < row; r++) {
+                        System.out.print("Set element " + "[" + (r + 1) + "," + (c + 1) + "] :");
+                        int number = Integer.parseInt(
+                            user_input.nextLine()
+                        );
+                        Elements.get(c).add(number);
+                    }
+                }     
             }
+
         }
         catch(Exception e) {
             System.out.println(e);
