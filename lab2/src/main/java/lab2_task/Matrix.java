@@ -116,6 +116,51 @@ public class Matrix {
             System.out.println("Value error");
         }
     }
+
+    public ArrayList<Integer> getColumn(int column) {
+        column = Math.abs(column) - 1;
+        if (column != -1 && column < Elements.size()) {           
+            return (ArrayList<Integer>) Elements.get(column).clone();
+        }else {
+            System.out.println("Value error");
+        }
+        return new ArrayList<Integer>();
+    }
+    public ArrayList<Integer> getRow(int row) {
+        ArrayList<Integer> new_column = new ArrayList<Integer>();
+        row = Math.abs(row) - 1;
+
+        if (Elements.size() != 0) {
+            if (row != -1 && row < Elements.get(0).size()) {
+                for (ArrayList<Integer> column: Elements) {
+                    new_column.add(
+                        column.get(row)
+                    );
+                }
+            }else {
+                System.out.println("Value error");
+            }
+        }else {
+            System.out.println("Value error");
+        }
+
+        return new_column;
+    }
+    public Integer getValue(int row, int column) {
+        row = Math.abs(row) - 1;
+        column = Math.abs(column) - 1;
+        
+        if (row != -1 && column != -1 && Elements.size() != 0) {
+            if (row < Elements.get(0).size() && column < Elements.size()) {
+                return Elements.get(column).get(row);
+            }else {
+                System.out.println("Value error");
+            }
+        }else {
+            System.out.println("Value error");
+        }
+        return 0;
+    }
 }
 
 

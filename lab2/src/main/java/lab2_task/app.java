@@ -14,10 +14,11 @@ public class app {
         Matrix matrix6 = new Matrix(matrix4);
         Matrix matrix7 = new Matrix(1,1);
 
-        matrix1.setMatrix();
-        matrix1.printElements();
+        matrix4.setValue(2,4,1234);
 
-        matrix4.setValue(2,4,2222);
-        matrix4.printElements();
+        System.out.println(matrix4.getValue(2,4));
+        System.out.println(matrix4.getRow(2));
+        System.out.println(matrix4.getRow(0));
+        System.out.println(matrix4.getColumn(4));
     }
 }
