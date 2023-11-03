@@ -20,5 +20,8 @@ public class app {
         System.out.println(matrix4.getRow(2));
         System.out.println(matrix4.getRow(0));
         System.out.println(matrix4.getColumn(4));
+
+        int[] X = matrix4.getSize();
+        System.out.println(X[0] + " X " + X[1]);
     }
 }

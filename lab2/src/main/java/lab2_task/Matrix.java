@@ -20,6 +20,15 @@ public class Matrix {
         }
     }
 
+    public int[] getSize() {
+        int[] X = {0,0};
+        if (Elements.size() != 0) {
+            X[0] = Elements.get(0).size();
+            X[1] = Elements.size();
+        }
+        return X;  
+    }
+
 
     Matrix() {
         Elements = new ArrayList<ArrayList<Integer>>();
