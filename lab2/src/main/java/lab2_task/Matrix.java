@@ -29,6 +29,34 @@ public class Matrix {
         return X;  
     }
 
+    public boolean matrixEquals(Matrix matrix) {
+        boolean answer = true;
+ 
+        if (Elements.size() == matrix.Elements.size()) {
+            if (Elements.size() != 0) {
+                if (Elements.get(0).size() == matrix.Elements.get(0).size()) {
+                    int row = Elements.get(0).size();
+                    int column = Elements.size();
+
+                    for (int c=0; c < column; c++) {
+                        for (int r=0; r < row; r++) {
+                            if (Elements.get(c).get(r) != matrix.Elements.get(c).get(r)) {
+                                answer = false;
+                            }
+                        }
+                    }
+                }else {
+                    answer = false;
+                }
+            }
+        }else {
+            answer = false;
+        }
+
+        return answer;
+    }
+
+
 
     Matrix() {
         Elements = new ArrayList<ArrayList<Integer>>();
