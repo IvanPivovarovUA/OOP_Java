@@ -4,11 +4,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 //  https://www.w3schools.com/java/java_arraylist.asp
 //  https://www.baeldung.com/java-multi-dimensional-arraylist
-public class Matrix {
+public final class ImmutMatrix {
+    
+    private final Scanner user_input = new Scanner(System.in);
     private ArrayList<ArrayList<Integer>> Elements;
-    private Scanner user_input = new Scanner(System.in);
 
-    public void printElements() {
+    public final void printElements() {
         if (Elements.size() != 0) {
             System.out.println("\n[");
             for (ArrayList<Integer> elem: Elements){
@@ -20,7 +21,7 @@ public class Matrix {
         }
     }
 
-    public int[] getSize() {
+    public final int[] getSize() {
         int[] X = {0,0};
         if (Elements.size() != 0) {
             X[0] = Elements.get(0).size();
@@ -29,7 +30,8 @@ public class Matrix {
         return X;  
     }
 
-    public boolean matrixEquals(Matrix matrix) {
+
+    public boolean matrixEquals(ImmutMatrix matrix) {
         boolean answer = true;
  
         if (getSize()[1] == matrix.getSize()[1]) {
@@ -56,11 +58,10 @@ public class Matrix {
         return answer;
     }
 
-
-    Matrix() {
+    ImmutMatrix() {
         this.Elements = new ArrayList<ArrayList<Integer>>();
     }
-    Matrix(int row, int column) {
+    ImmutMatrix(int row, int column) {
         this.Elements = new ArrayList<ArrayList<Integer>>();
 
         row = Math.abs(row);
@@ -72,10 +73,28 @@ public class Matrix {
                 for (int r=0; r < row; r++) {
                     Elements.get(c).add(0);
                 }
-            }   
+            } 
         }
     }
-    Matrix(Matrix matrix) {
+    ImmutMatrix(ImmutMatrix matrix) {
+        this.Elements = new ArrayList<ArrayList<Integer>>();
+
+        if (matrix.getSize()[1] != 0) {
+            int row = matrix.getSize()[0];
+            int column = matrix.getSize()[1];
+
+            for (int c=0; c < column; c++) {
+                Elements.add(new ArrayList<Integer>());
+
+                for (int r=0; r < row; r++) {
+                    Elements.get(c).add(
+                        matrix.getValue(r+1,c+1)
+                    );
+                }
+            }
+        }
+    }
+    ImmutMatrix(Matrix matrix) {
         this.Elements = new ArrayList<ArrayList<Integer>>();
 
         if (matrix.getSize()[1] != 0) {
@@ -94,8 +113,7 @@ public class Matrix {
         }
     }
 
-
-    public void setMatrix() {
+    private final void setMatrix() {
         try {
             System.out.print("Set matrix Rows size:");
             int row = Math.abs(
@@ -140,7 +158,7 @@ public class Matrix {
             Elements = new ArrayList<ArrayList<Integer>>();
         }
     }
-    public void setValue(int row, int column, int new_value) {
+    private final void setValue(int row, int column, int new_value) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         if (row != -1 && column != -1 && Elements.size() != 0) {
@@ -154,7 +172,7 @@ public class Matrix {
         }
     }
 
-    public ArrayList<Integer> getColumn(int column) {
+    public final ArrayList<Integer> getColumn(int column) {
         column = Math.abs(column) - 1;
         if (column != -1 && column < Elements.size()) {           
             return (ArrayList<Integer>) Elements.get(column).clone();
@@ -163,7 +181,7 @@ public class Matrix {
         }
         return new ArrayList<Integer>();
     }
-    public ArrayList<Integer> getRow(int row) {
+    public final ArrayList<Integer> getRow(int row) {
         ArrayList<Integer> new_column = new ArrayList<Integer>();
         row = Math.abs(row) - 1;
 
@@ -183,7 +201,7 @@ public class Matrix {
 
         return new_column;
     }
-    public Integer getValue(int row, int column) {
+    public final Integer getValue(int row, int column) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         
@@ -199,6 +217,3 @@ public class Matrix {
         return 0;
     }
 }
-
-
-
