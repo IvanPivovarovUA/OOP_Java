@@ -223,7 +223,34 @@ public class Matrix {
             }
         }
     }
-}
+
+    /*
+            m
+    C(ij) = E A(ik) * B(kj)
+            k=1
+    */
+    public void multMatrix(Matrix matrix) {
+        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();;
+
+        if (getSize()[0] == matrix.getSize()[1]) {
+            for (int c = 0; c < getSize()[1]; c++) {
+                newElements.add(new ArrayList<Integer>());
+                for (int r = 0; r < matrix.getSize()[0]; r++) {
+                    int sum = 0;
+
+                    for (int rp = 0; rp < getSize()[0]; rp++) {
+                        sum += getValue(rp+1,c+1) * matrix.getValue(r+1,rp+1);
+                    }
+
+                    newElements.get(c).add(sum);
+                }
+            }
+            this.Elements = newElements;
+        }else {
+            System.out.println("Error. A row != B column");
+        }
+    }
+} 
 
 
 
