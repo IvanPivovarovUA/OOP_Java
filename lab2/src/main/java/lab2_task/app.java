@@ -12,9 +12,10 @@ public class app {
         matrix1.setValue(2,3,34);
         matrix1.setValue(3,5,36);
         matrix1.setValue(1,3,3);
-        matrix1.setValue(2,6,3);
-        matrix1.setValue(3,7,34);
 
+        // Matrix matrix2 = new Matrix();
+        // Matrix matrix3 = new Matrix();
+        // matrix2.plusMatrix(matrix3);
 
         matrix1.printElements();
         matrix1.randomizeRow(3);

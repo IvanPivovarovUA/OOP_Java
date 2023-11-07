@@ -301,20 +301,43 @@ public class Matrix {
     }
 
     public void randomizeRow(int row) {
+        row = Math.abs(row - 1);
         Random rand = new Random();
 
-        for (int r = 0; r < getSize()[0]; r++) {
-            int number = rand.nextInt(201);
-            if (number > 100) {
-                number = 100 - number;
-            }
+        if (row < getSize()[1]) {
+            for (int r = 0; r < getSize()[0]; r++) {
+                int number = rand.nextInt(201);
+                if (number > 100) {
+                    number = 100 - number;
+                }
 
-            Elements.get(row).set(
-                r,
-                number
-            );
+                Elements.get(row).set(
+                    r,
+                    number
+                );
+            } 
+        }else {
+            System.out.println("Value Error");
         }
+
     }
+
+    // public void randomizeColumn(int column) {
+    //     Random rand = new Random();
+
+    //     for (int c = 0; c < getSize()[1]; c++) {
+
+    //         int number = rand.nextInt(201);
+    //         if (number > 100) {
+    //             number = 100 - number;
+    //         }
+
+    //         Elements.get(c).set(
+    //             column,
+    //             number
+    //         );
+    //     }
+    // }
 } 
 
 
