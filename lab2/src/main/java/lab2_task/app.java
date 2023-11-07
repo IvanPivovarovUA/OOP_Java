@@ -18,7 +18,12 @@ public class app {
         // matrix2.plusMatrix(matrix3);
 
         matrix1.printElements();
-        matrix1.randomizeRow(3);
+        matrix1.randomizeRow(5);
+        matrix1.printElements();
+
+        
+        matrix1.printElements();
+        matrix1.randomizeColumn(3);
         matrix1.printElements();
     }
 }

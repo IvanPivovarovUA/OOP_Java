@@ -322,22 +322,26 @@ public class Matrix {
 
     }
 
-    // public void randomizeColumn(int column) {
-    //     Random rand = new Random();
+    public void randomizeColumn(int column) {
+        column = Math.abs(column - 1);
+        Random rand = new Random();
 
-    //     for (int c = 0; c < getSize()[1]; c++) {
+        if (column < getSize()[0]) {
+            for (int c = 0; c < getSize()[1]; c++) {
+                int number = rand.nextInt(201);
+                if (number > 100) {
+                    number = 100 - number;
+                }
 
-    //         int number = rand.nextInt(201);
-    //         if (number > 100) {
-    //             number = 100 - number;
-    //         }
-
-    //         Elements.get(c).set(
-    //             column,
-    //             number
-    //         );
-    //     }
-    // }
+                Elements.get(c).set(
+                    column,
+                    number
+                );
+            } 
+        }else {
+            System.out.println("Value Error");
+        }
+    }
 } 
 
 
