@@ -267,6 +267,23 @@ public class Matrix {
 
         this.Elements = newElements;
     }
+    
+    public void toDiagonal(int[] vector) {
+        this.Elements = new ArrayList<ArrayList<Integer>>();
+        int size = vector.length;
+
+        for (int c = 0; c < size; c++) {
+            Elements.add(new ArrayList<Integer>());
+            for (int r = 0; r < size; r++) {
+                if (c == r) {
+                    Elements.get(c).add(vector[c]);
+                }else {
+                    Elements.get(c).add(0);
+                }
+                
+            }
+        }
+    }
 } 
 
 

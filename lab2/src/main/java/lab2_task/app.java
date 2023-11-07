@@ -17,7 +17,8 @@ public class app {
 
 
         matrix1.printElements();
-        matrix1.toTranspose();
+        int[] vector = {4,24,6,8,1};
+        matrix1.toDiagonal(vector);
         matrix1.printElements();
     }
 }
