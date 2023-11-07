@@ -284,6 +284,20 @@ public class Matrix {
             }
         }
     }
+    public void toSingle(int size) {
+        this.Elements = new ArrayList<ArrayList<Integer>>();
+
+        for (int c = 0; c < size; c++) {
+            Elements.add(new ArrayList<Integer>());
+            for (int r = 0; r < size; r++) {
+                if (c == r) {
+                    Elements.get(c).add(1);
+                }else {
+                    Elements.get(c).add(0);
+                }    
+            }
+        }
+    }
 } 
 
 
