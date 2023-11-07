@@ -6,16 +6,19 @@ public class app {
     - run comand for Scanner
     */
     public static void main(String[] args) {
-        ImmutMatrix matrix1 = new ImmutMatrix(30,30);
-        ImmutMatrix matrix2 = new ImmutMatrix(30,30);
+ 
+        Matrix matrix1 = new Matrix(10,20);
+        Matrix matrix2 = new Matrix(10,20);
         
-        Matrix matrix3 = new Matrix(30,30);
-        Matrix matrix4 = new Matrix(30,30);
+        
+        matrix2.setValue(3,4,3);
+        matrix2.setValue(9,14,34);
 
-        System.out.println(
-            matrix3.matrixEquals(matrix4) + "|" +
-            matrix2.matrixEquals(matrix1)
-        );
+        matrix1.setValue(3,4,100);
+        matrix1.plusMatrix(matrix2);
+        matrix1.multScalar(-2);
+
+        matrix1.printElements();
 
         // matrix1.setValue(4,4,4);
         

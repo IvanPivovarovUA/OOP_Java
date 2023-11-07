@@ -198,6 +198,31 @@ public class Matrix {
         }
         return 0;
     }
+
+    public void plusMatrix(Matrix matrix) {
+
+        if (getSize()[0] == matrix.getSize()[0] && getSize()[1] == matrix.getSize()[1]) {
+            for (int c = 0; c < getSize()[1]; c++) {
+                for (int r = 0; r < getSize()[0]; r++) {
+                    Elements.get(c).set(
+                        r,
+                        getValue(r + 1,c + 1) + matrix.getValue(r + 1,c + 1)
+                    );
+                }
+            }
+        }
+    
+    }
+    public void multScalar(int number) {
+        for (int c = 0; c < getSize()[1]; c++) {
+            for (int r = 0; r < getSize()[0]; r++) {
+                Elements.get(c).set(
+                    r,
+                    getValue(r + 1,c + 1) * number
+                );
+            }
+        }
+    }
 }
 
 
