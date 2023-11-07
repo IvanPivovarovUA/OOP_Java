@@ -230,7 +230,7 @@ public class Matrix {
             k=1
     */
     public void multMatrix(Matrix matrix) {
-        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();;
+        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();
 
         if (getSize()[0] == matrix.getSize()[1]) {
             for (int c = 0; c < getSize()[1]; c++) {
@@ -249,6 +249,23 @@ public class Matrix {
         }else {
             System.out.println("Error. A row != B column");
         }
+    }
+    public void toTranspose(){
+        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();
+        int row = getSize()[0];
+        int column = getSize()[1];
+
+
+        for (int c = 0; c < row; c++) {
+            newElements.add(new ArrayList<Integer>());
+            for (int r = 0; r < column; r++) {
+                newElements.get(c).add(
+                    getValue(c+1,r+1)
+                );
+            }
+        }
+
+        this.Elements = newElements;
     }
 } 
 
