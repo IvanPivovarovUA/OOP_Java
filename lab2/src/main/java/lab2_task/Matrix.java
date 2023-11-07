@@ -1,5 +1,6 @@
 package lab2_task;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 //  https://www.w3schools.com/java/java_arraylist.asp
@@ -296,6 +297,22 @@ public class Matrix {
                     Elements.get(c).add(0);
                 }    
             }
+        }
+    }
+
+    public void randomizeRow(int row) {
+        Random rand = new Random();
+
+        for (int r = 0; r < getSize()[0]; r++) {
+            int number = rand.nextInt(201);
+            if (number > 100) {
+                number = 100 - number;
+            }
+
+            Elements.get(row).set(
+                r,
+                number
+            );
         }
     }
 } 

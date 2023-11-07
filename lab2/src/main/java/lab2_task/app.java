@@ -17,7 +17,7 @@ public class app {
 
 
         matrix1.printElements();
-        matrix1.toSingle(3);
+        matrix1.randomizeRow(3);
         matrix1.printElements();
     }
 }
