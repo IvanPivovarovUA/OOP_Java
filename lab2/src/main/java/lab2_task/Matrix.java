@@ -32,15 +32,15 @@ public class Matrix {
     public boolean matrixEquals(Matrix matrix) {
         boolean answer = true;
  
-        if (Elements.size() == matrix.Elements.size()) {
-            if (Elements.size() != 0) {
-                if (Elements.get(0).size() == matrix.Elements.get(0).size()) {
-                    int row = Elements.get(0).size();
-                    int column = Elements.size();
+        if (getSize()[1] == matrix.getSize()[1]) {
+            if (getSize()[1] != 0) {
+                if (getSize()[0] == matrix.getSize()[0]) {
+                    int row = getSize()[0];
+                    int column = getSize()[1] ;
 
                     for (int c=0; c < column; c++) {
                         for (int r=0; r < row; r++) {
-                            if (Elements.get(c).get(r) != matrix.Elements.get(c).get(r)) {
+                            if (getValue(r+1,c+1) != matrix.getValue(r+1,c+1)) {
                                 answer = false;
                             }
                         }
@@ -55,7 +55,6 @@ public class Matrix {
 
         return answer;
     }
-
 
 
     Matrix() {
