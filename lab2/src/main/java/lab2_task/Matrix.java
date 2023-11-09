@@ -354,7 +354,7 @@ public class Matrix {
                     head = getValue(h+1 + m, h+1);
                 }
 
-                for (int c = h+1; c < getSize()[1]; c++) {
+                for (int c = h +1; c < getSize()[1]; c++) {
                     double cut = getValue(h+1 + m,c+1);
 
                     for (int r2 = 0; r2 < getSize()[0]; r2++) {
@@ -394,7 +394,59 @@ public class Matrix {
             );
         }
     }
-} 
+
+   public void makeTriangularDown() {
+        printElements();
+        int m = 0;
+        if (getSize()[0] == getSize()[1]) {
+            for (int h = getSize()[0]-1; h > 0; h--) {
+                double head = getValue(h+1 + m,h+1);
+                // System.out.println("Zero!!!" + head);
+
+                for (int c = h-1; c >= 0; c--) {
+                    head = getValue(h+1 + m,h+1);
+
+                    if (-0.001 <= head && head <= 0.001) {
+                        System.out.println("Zero!");
+                        replaceRows(h,c);
+                        printElements();
+                    }else {
+                        break;
+                    }
+                }
+                head = getValue(h+1 + m,h+1);
+                if (-0.001 <= head && head <= 0.001) {
+                    System.out.println("END!");
+                    // continue;
+                    m -=1;
+                    head = getValue(h+1 + m, h+1);
+                }
+
+                for (int c = h -1; c >= 0; c--) {
+                    double cut = getValue(h+1 + m,c+1);
+
+                    for (int r2 = getSize()[0]-1; r2 >= 0; r2--) {
+
+                        double number = getValue(r2+1,c+1) - cut * getValue(r2+1,h+1) / head;
+                        number *= 1000;
+                        number = Math.floor(number);
+                        number /= 1000;
+                        Elements.get(c).set(
+                            r2,
+                            number
+                        );
+                    }
+                }
+                printElements();
+                // user_input.nextLine();
+
+            }
+        }else {
+            System.out.println("Value Error! Row != Column");
+        }
+
+    }
 
 
 
+}
