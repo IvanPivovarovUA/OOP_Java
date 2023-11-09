@@ -6,13 +6,13 @@ import java.util.ArrayList;
 //  https://www.w3schools.com/java/java_arraylist.asp
 //  https://www.baeldung.com/java-multi-dimensional-arraylist
 public class Matrix {
-    private ArrayList<ArrayList<Integer>> Elements;
+    private ArrayList<ArrayList<Double>> Elements;
     private Scanner user_input = new Scanner(System.in);
 
     public void printElements() {
         if (Elements.size() != 0) {
             System.out.println("\n[");
-            for (ArrayList<Integer> elem: Elements){
+            for (ArrayList<Double> elem: Elements){
                 System.out.println(elem);
             }
             System.out.println("]\n");
@@ -59,41 +59,24 @@ public class Matrix {
 
 
     Matrix() {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
     }
     Matrix(int row, int column) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
 
         row = Math.abs(row);
         column = Math.abs(column);
         if (row != 0 && column != 0) {
             for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
+                Elements.add(new ArrayList<Double>());
 
                 for (int r=0; r < row; r++) {
-                    Elements.get(c).add(0);
+                    Elements.get(c).add(0.0);
                 }
             }   
         }
     }
-    Matrix(Matrix matrix) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
 
-        if (matrix.getSize()[1] != 0) {
-            int row = matrix.getSize()[0];
-            int column = matrix.getSize()[1];
-
-            for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
-
-                for (int r=0; r < row; r++) {
-                    Elements.get(c).add(
-                        matrix.getValue(r+1,c+1)
-                    );
-                }
-            }
-        }
-    }
 
 
     public void setMatrix() {
@@ -120,16 +103,17 @@ public class Matrix {
                 column = 100;
             }
 
-            Elements = new ArrayList<ArrayList<Integer>>();
+            Elements = new ArrayList<ArrayList<Double>>();
             if (row != 0 && column != 0) {
                 for (int c=0; c < column; c++) {
-                    Elements.add(new ArrayList<Integer>());
+                    Elements.add(new ArrayList<Double>());
 
                     for (int r=0; r < row; r++) {
                         System.out.print("Set element " + "[" + (r + 1) + "," + (c + 1) + "] :");
-                        int number = Integer.parseInt(
+                        Double number = Double.parseDouble(
                             user_input.nextLine()
                         );
+                    
                         Elements.get(c).add(number);
                     }
                 }     
@@ -138,10 +122,10 @@ public class Matrix {
         }
         catch(Exception e) {
             System.out.println(e);
-            Elements = new ArrayList<ArrayList<Integer>>();
+            Elements = new ArrayList<ArrayList<Double>>();
         }
     }
-    public void setValue(int row, int column, int new_value) {
+    public void setValue(int row, int column, double new_value) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         if (row != -1 && column != -1 && Elements.size() != 0) {
@@ -155,22 +139,22 @@ public class Matrix {
         }
     }
 
-    public ArrayList<Integer> getColumn(int column) {
+    public ArrayList<Double> getRow(int column) {
         column = Math.abs(column) - 1;
         if (column != -1 && column < Elements.size()) {           
-            return (ArrayList<Integer>) Elements.get(column).clone();
+            return (ArrayList<Double>) Elements.get(column).clone();
         }else {
             System.out.println("Value error");
         }
-        return new ArrayList<Integer>();
+        return new ArrayList<Double>();
     }
-    public ArrayList<Integer> getRow(int row) {
-        ArrayList<Integer> new_column = new ArrayList<Integer>();
+    public ArrayList<Double> getColumn(int row) {
+        ArrayList<Double> new_column = new ArrayList<Double>();
         row = Math.abs(row) - 1;
 
         if (Elements.size() != 0) {
             if (row != -1 && row < Elements.get(0).size()) {
-                for (ArrayList<Integer> column: Elements) {
+                for (ArrayList<Double> column: Elements) {
                     new_column.add(
                         column.get(row)
                     );
@@ -184,7 +168,7 @@ public class Matrix {
 
         return new_column;
     }
-    public Integer getValue(int row, int column) {
+    public Double getValue(int row, int column) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         
@@ -197,7 +181,7 @@ public class Matrix {
         }else {
             System.out.println("Value error");
         }
-        return 0;
+        return 0.0;
     }
 
     public void plusMatrix(Matrix matrix) {
@@ -231,13 +215,13 @@ public class Matrix {
             k=1
     */
     public void multMatrix(Matrix matrix) {
-        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Double>> newElements = new ArrayList<ArrayList<Double>>();
 
         if (getSize()[0] == matrix.getSize()[1]) {
             for (int c = 0; c < getSize()[1]; c++) {
-                newElements.add(new ArrayList<Integer>());
+                newElements.add(new ArrayList<Double>());
                 for (int r = 0; r < matrix.getSize()[0]; r++) {
-                    int sum = 0;
+                    Double sum = 0.0;
 
                     for (int rp = 0; rp < getSize()[0]; rp++) {
                         sum += getValue(rp+1,c+1) * matrix.getValue(r+1,rp+1);
@@ -252,13 +236,13 @@ public class Matrix {
         }
     }
     public void toTranspose(){
-        ArrayList<ArrayList<Integer>> newElements = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Double>> newElements = new ArrayList<ArrayList<Double>>();
         int row = getSize()[0];
         int column = getSize()[1];
 
 
         for (int c = 0; c < row; c++) {
-            newElements.add(new ArrayList<Integer>());
+            newElements.add(new ArrayList<Double>());
             for (int r = 0; r < column; r++) {
                 newElements.get(c).add(
                     getValue(c+1,r+1)
@@ -269,32 +253,32 @@ public class Matrix {
         this.Elements = newElements;
     }
     
-    public void toDiagonal(int[] vector) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+    public void toDiagonal(double[] vector) {
+        this.Elements = new ArrayList<ArrayList<Double>>();
         int size = vector.length;
 
         for (int c = 0; c < size; c++) {
-            Elements.add(new ArrayList<Integer>());
+            Elements.add(new ArrayList<Double>());
             for (int r = 0; r < size; r++) {
                 if (c == r) {
                     Elements.get(c).add(vector[c]);
                 }else {
-                    Elements.get(c).add(0);
+                    Elements.get(c).add(0.0);
                 }
                 
             }
         }
     }
     public void toSingle(int size) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
 
         for (int c = 0; c < size; c++) {
-            Elements.add(new ArrayList<Integer>());
+            Elements.add(new ArrayList<Double>());
             for (int r = 0; r < size; r++) {
                 if (c == r) {
-                    Elements.get(c).add(1);
+                    Elements.get(c).add(1.0);
                 }else {
-                    Elements.get(c).add(0);
+                    Elements.get(c).add(0.0);
                 }    
             }
         }
@@ -306,7 +290,7 @@ public class Matrix {
 
         if (row < getSize()[1]) {
             for (int r = 0; r < getSize()[0]; r++) {
-                int number = rand.nextInt(201);
+                double number = (double) rand.nextInt(201);
                 if (number > 100) {
                     number = 100 - number;
                 }
@@ -328,7 +312,7 @@ public class Matrix {
 
         if (column < getSize()[0]) {
             for (int c = 0; c < getSize()[1]; c++) {
-                int number = rand.nextInt(201);
+                double number = (double) rand.nextInt(201);
                 if (number > 100) {
                     number = 100 - number;
                 }
@@ -340,6 +324,74 @@ public class Matrix {
             } 
         }else {
             System.out.println("Value Error");
+        }
+    }
+
+    public void makeTriangularUp() {
+        printElements();
+        int m = 0;
+        if (getSize()[0] == getSize()[1]) {
+            for (int h = 0; h < getSize()[0] - 1; h++) {
+                double head = getValue(h+1 + m,h+1);
+                // System.out.println("Zero!!!" + head);
+
+                for (int c = h+1; c < getSize()[1]; c++) {
+                    head = getValue(h+1 + m,h+1);
+
+                    if (-0.001 <= head && head <= 0.001) {
+                        System.out.println("Zero!");
+                        replaceRows(h,c);
+                        printElements();
+                    }else {
+                        break;
+                    }
+                }
+                head = getValue(h+1 + m,h+1);
+                if (-0.001 <= head && head <= 0.001) {
+                    System.out.println("END!");
+                    // continue;
+                    m +=1;
+                    head = getValue(h+1 + m, h+1);
+                }
+
+                for (int c = h+1; c < getSize()[1]; c++) {
+                    double cut = getValue(h+1 + m,c+1);
+
+                    for (int r2 = 0; r2 < getSize()[0]; r2++) {
+
+                        double number = getValue(r2+1,c+1) - cut * getValue(r2+1,h+1) / head;
+                        number *= 1000;
+                        number = Math.floor(number);
+                        number /= 1000;
+                        Elements.get(c).set(
+                            r2,
+                            number
+                        );
+                    }
+                }
+                printElements();
+                // user_input.nextLine();
+
+            }
+        }else {
+            System.out.println("Value Error! Row != Column");
+        }
+
+    }
+
+    public void replaceRows(int first_index, int second_index) {
+        ArrayList<Double> first_row = getRow(first_index + 1);
+        ArrayList<Double> second_row = getRow(second_index + 1);
+
+        for (int r=0; r < getSize()[0]; r++) {
+            Elements.get(first_index).set(
+                r,
+                second_row.get(r)
+            );
+            Elements.get(second_index).set(
+                r,
+                first_row.get(r)
+            );
         }
     }
 } 

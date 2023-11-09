@@ -94,24 +94,6 @@ public final class ImmutMatrix {
             }
         }
     }
-    ImmutMatrix(Matrix matrix) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
-
-        if (matrix.getSize()[1] != 0) {
-            int row = matrix.getSize()[0];
-            int column = matrix.getSize()[1];
-
-            for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
-
-                for (int r=0; r < row; r++) {
-                    Elements.get(c).add(
-                        matrix.getValue(r+1,c+1)
-                    );
-                }
-            }
-        }
-    }
 
     private final void setMatrix() {
         try {

@@ -6,24 +6,31 @@ public class app {
     - run comand for Scanner
     */
     public static void main(String[] args) { 
-        Matrix matrix1 = new Matrix(3,5);
+        Matrix matrix1 = new Matrix(4,4);
 
-        matrix1.setValue(1,4,3);
-        matrix1.setValue(2,3,34);
-        matrix1.setValue(3,5,36);
-        matrix1.setValue(1,3,3);
+        matrix1.setValue(1,1,3);//3
+        matrix1.setValue(1,2,4);
+        matrix1.setValue(1,3,1);
+        matrix1.setValue(1,4,2);
 
-        // Matrix matrix2 = new Matrix();
-        // Matrix matrix3 = new Matrix();
-        // matrix2.plusMatrix(matrix3);
-
-        matrix1.printElements();
-        matrix1.randomizeRow(5);
-        matrix1.printElements();
-
+        matrix1.setValue(2,1,2);
+        matrix1.setValue(2,2,(double) 4*2/3);//4
+        matrix1.setValue(2,3,(double) 1*2/3);//4
+        matrix1.setValue(2,4,(double) 2*2/3);//3
         
-        matrix1.printElements();
-        matrix1.randomizeColumn(3);
-        matrix1.printElements();
+        matrix1.setValue(3,1,3);
+        matrix1.setValue(3,2,3);
+        matrix1.setValue(3,3,4);//4;
+        matrix1.setValue(3,4,1);
+
+        matrix1.setValue(4,1,4);
+        matrix1.setValue(4,2,2);
+        matrix1.setValue(4,3,3);
+        matrix1.setValue(4,4,1);
+
+
+        // matrix1.printElements();
+        matrix1.makeTriangularUp();
+        // matrix1.printElements();
     }
 }
