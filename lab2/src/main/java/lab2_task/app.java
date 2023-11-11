@@ -7,55 +7,15 @@ public class app {
     */
     public static void main(String[] args) { 
         Matrix matrix1 = new Matrix(4,4);
+        ImmutMatrix matrix2 = new ImmutMatrix(4,2);
 
+        Matrix matrix3 = new Matrix(matrix2);
+        ImmutMatrix matrix4 = new ImmutMatrix(matrix1);
 
-        // matrix1.setValue(1,1,3);//3
-        // matrix1.setValue(1,2,4);
-        // matrix1.setValue(1,3,1);
-        // matrix1.setValue(1,4,2);
-
-        // matrix1.setValue(2,1,2);
-        // matrix1.setValue(2,2,(double) 4*2/3);//4
-        // matrix1.setValue(2,3,(double) 1*2/3);//4
-        // matrix1.setValue(2,4,(double) 2*2/3);//3
-        
-        // matrix1.setValue(3,1,3);
-        // matrix1.setValue(3,2,3);
-        // matrix1.setValue(3,3,4);//4;
-        // matrix1.setValue(3,4,1);
-
-        // matrix1.setValue(4,1,4);
-        // matrix1.setValue(4,2,2);
-        // matrix1.setValue(4,3,3);
-        // matrix1.setValue(4,4,1);
-
-        matrix1.setValue(1,1,3);//3
-        matrix1.setValue(1,2,4);
-        matrix1.setValue(1,3,1);
-        matrix1.setValue(1,4,2);
-
-        matrix1.setValue(2,1,2);
-        matrix1.setValue(2,2,4);//4
-        matrix1.setValue(2,3,4);//4
-        matrix1.setValue(2,4,3);//3
-        
-        matrix1.setValue(3,1,3);//3
-        matrix1.setValue(3,2,3);//3
-        matrix1.setValue(3,3,4);//4;
-        matrix1.setValue(3,4,1);
-
-        matrix1.setValue(4,1,4);
-        matrix1.setValue(4,2,2);
-        matrix1.setValue(4,3,3);
-        matrix1.setValue(4,4,1);
-
-        Matrix matrix2 = new Matrix(matrix1);
-        // matrix2.printElements();
-
-        // matrix1.printElements();
-        matrix2.makeTriangularUp();
-        // matrix1.printElements();
-
+        matrix3.printElements();
+        matrix4.printElements();
+        // System.out.print(mat.getSize()[0]);
+        // mat.printElements();
 
     }
 }

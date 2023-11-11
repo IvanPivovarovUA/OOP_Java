@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public final class ImmutMatrix {
     
     private final Scanner user_input = new Scanner(System.in);
-    private ArrayList<ArrayList<Integer>> Elements;
+    private ArrayList<ArrayList<Double>> Elements;
 
     public final void printElements() {
         if (Elements.size() != 0) {
             System.out.println("\n[");
-            for (ArrayList<Integer> elem: Elements){
+            for (ArrayList<Double> elem: Elements){
                 System.out.println(elem);
             }
             System.out.println("]\n");
@@ -59,32 +59,50 @@ public final class ImmutMatrix {
     }
 
     ImmutMatrix() {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
     }
     ImmutMatrix(int row, int column) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
 
         row = Math.abs(row);
         column = Math.abs(column);
         if (row != 0 && column != 0) {
             for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
+                Elements.add(new ArrayList<Double>());
 
                 for (int r=0; r < row; r++) {
-                    Elements.get(c).add(0);
+                    Elements.get(c).add(0.0);
                 }
             } 
         }
     }
     ImmutMatrix(ImmutMatrix matrix) {
-        this.Elements = new ArrayList<ArrayList<Integer>>();
+        this.Elements = new ArrayList<ArrayList<Double>>();
 
         if (matrix.getSize()[1] != 0) {
             int row = matrix.getSize()[0];
             int column = matrix.getSize()[1];
 
             for (int c=0; c < column; c++) {
-                Elements.add(new ArrayList<Integer>());
+                Elements.add(new ArrayList<Double>());
+
+                for (int r=0; r < row; r++) {
+                    Elements.get(c).add(
+                        matrix.getValue(r+1,c+1)
+                    );
+                }
+            }
+        }
+    }
+    ImmutMatrix(Matrix matrix) {
+        this.Elements = new ArrayList<ArrayList<Double>>();
+
+        if (matrix.getSize()[1] != 0) {
+            int row = matrix.getSize()[0];
+            int column = matrix.getSize()[1];
+
+            for (int c=0; c < column; c++) {
+                Elements.add(new ArrayList<Double>());
 
                 for (int r=0; r < row; r++) {
                     Elements.get(c).add(
@@ -119,14 +137,14 @@ public final class ImmutMatrix {
                 column = 100;
             }
 
-            Elements = new ArrayList<ArrayList<Integer>>();
+            Elements = new ArrayList<ArrayList<Double>>();
             if (row != 0 && column != 0) {
                 for (int c=0; c < column; c++) {
-                    Elements.add(new ArrayList<Integer>());
+                    Elements.add(new ArrayList<Double>());
 
                     for (int r=0; r < row; r++) {
                         System.out.print("Set element " + "[" + (r + 1) + "," + (c + 1) + "] :");
-                        int number = Integer.parseInt(
+                        double number = Double.parseDouble(
                             user_input.nextLine()
                         );
                         Elements.get(c).add(number);
@@ -137,10 +155,10 @@ public final class ImmutMatrix {
         }
         catch(Exception e) {
             System.out.println(e);
-            Elements = new ArrayList<ArrayList<Integer>>();
+            Elements = new ArrayList<ArrayList<Double>>();
         }
     }
-    private final void setValue(int row, int column, int new_value) {
+    private final void setValue(int row, int column, double new_value) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         if (row != -1 && column != -1 && Elements.size() != 0) {
@@ -154,22 +172,22 @@ public final class ImmutMatrix {
         }
     }
 
-    public final ArrayList<Integer> getColumn(int column) {
+    public final ArrayList<Double> getColumn(int column) {
         column = Math.abs(column) - 1;
         if (column != -1 && column < Elements.size()) {           
-            return (ArrayList<Integer>) Elements.get(column).clone();
+            return (ArrayList<Double>) Elements.get(column).clone();
         }else {
             System.out.println("Value error");
         }
-        return new ArrayList<Integer>();
+        return new ArrayList<Double>();
     }
-    public final ArrayList<Integer> getRow(int row) {
-        ArrayList<Integer> new_column = new ArrayList<Integer>();
+    public final ArrayList<Double> getRow(int row) {
+        ArrayList<Double> new_column = new ArrayList<Double>();
         row = Math.abs(row) - 1;
 
         if (Elements.size() != 0) {
             if (row != -1 && row < Elements.get(0).size()) {
-                for (ArrayList<Integer> column: Elements) {
+                for (ArrayList<Double> column: Elements) {
                     new_column.add(
                         column.get(row)
                     );
@@ -183,7 +201,7 @@ public final class ImmutMatrix {
 
         return new_column;
     }
-    public final Integer getValue(int row, int column) {
+    public final Double getValue(int row, int column) {
         row = Math.abs(row) - 1;
         column = Math.abs(column) - 1;
         
@@ -196,6 +214,6 @@ public final class ImmutMatrix {
         }else {
             System.out.println("Value error");
         }
-        return 0;
+        return 0.0;
     }
 }
