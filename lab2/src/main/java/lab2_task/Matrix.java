@@ -29,7 +29,10 @@ public class Matrix {
         }
         return X;  
     }
-
+// matrixEquals
+    public boolean matrixEquals(ImmutMatrix matrix){
+        return false;
+    }
     public boolean matrixEquals(Matrix matrix) {
         boolean answer = true;
  
