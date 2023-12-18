@@ -42,18 +42,21 @@ public class DummyBinder implements Binder {
         try {
             T set_in_list_object = null;
 
+            boolean test_inject = false;
             Constructor<?>[] constructors = clazz.getConstructors();
             for (Constructor<?> constructor : constructors) {
-                Parameter[] parameters = constructor.getParameters();
-                Object[] list_of_param = new Object[parameters.length]; 
+                if (null != constructor.getAnnotation(Inject.class)) {
+                    test_inject = true;
 
-                for (int i = 0; i < parameters.length; i++) {
-                    list_of_param[i] = parameters[i].getType().newInstance();
+                    Parameter[] parameters = constructor.getParameters();
+                    Object[] list_of_param = new Object[parameters.length]; 
+                    for (int i = 0; i < parameters.length; i++) {
+                        list_of_param[i] = parameters[i].getType().newInstance();
+                    }
+                    set_in_list_object = (T) constructor.newInstance(
+                        list_of_param
+                    );
                 }
-
-                set_in_list_object = (T) constructor.newInstance(
-                    list_of_param
-                );
             }
             if (set_in_list_object == null) {
                 set_in_list_object = (T) clazz.newInstance();
@@ -66,7 +69,7 @@ public class DummyBinder implements Binder {
                 }
             }
             
-            if (test_singleton) {
+            if (test_singleton || test_inject) {
                 objectsInstances.put(
                     clazz,
                     set_in_list_object
