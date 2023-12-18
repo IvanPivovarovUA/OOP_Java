@@ -42,9 +42,21 @@ public class Example {
         assertSame(container.getComponent(B.class), bAsSingleton);
     }
 
-    // @Test
-    // public void shouldBuildInjectDependencies() {
-    //     final UseA hasADependency = container.getComponent(UseA.class);
-    //     assertSame(hasADependency.getDependency(), container.getComponent(B.class));
-    // }
+    @Test
+    public void shouldBuildInjectDependencies() {
+        final UseA hasADependency = container.getComponent(UseA.class);
+        assertSame(hasADependency.getDependency(), container.getComponent(B.class));
+    }
+
+    @Test
+    public void myOwnTest() {
+        final UseA test1 = container.getComponent(UseA.class);
+        assertNotSame(test1,container.getComponent(UseA.class));
+
+        final UseC test2 = container.getComponent(UseC.class);
+        assertSame(test2,container.getComponent(UseC.class));
+
+        assertSame(test2.getA_Dependency(), container.getComponent(B.class));
+        assertSame(test2.getB_Dependency(), container.getComponent(B.class));
+    }
 }

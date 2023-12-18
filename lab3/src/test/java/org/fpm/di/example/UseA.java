@@ -6,7 +6,7 @@ public class UseA {
     private final A dependency;
 
     @Inject
-    public UseA(A a, B b) {
+    public UseA(A a) {
         this.dependency = a;
     }
 

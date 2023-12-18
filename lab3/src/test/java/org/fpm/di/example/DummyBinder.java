@@ -17,16 +17,16 @@ import java.lang.reflect.Parameter;
 public class DummyBinder implements Binder {
 
     private final HashMap<Class, Object> objectsInstances = new HashMap<Class, Object>();
-    private final HashMap<Class, Class> changedDependencies = new HashMap<Class, Class>();
+    // private final HashMap<Class, Class> changedDependencies = new HashMap<Class, Class>();
     // private final Set<Object> objectsInstances = new HashSet<>();
 
     public HashMap<Class, Object> getObjectsInstances() {
         return objectsInstances;
     }
     
-    public HashMap<Class, Class> getChangedDependencies() {
-        return changedDependencies;
-    }
+    // public HashMap<Class, Class> getChangedDependencies() {
+    //     return changedDependencies;
+    // }
     // public <T> void add_in_objectsInstances(T instance) {
     //     objectsInstances.add(
     //         instance
@@ -51,7 +51,15 @@ public class DummyBinder implements Binder {
                     Parameter[] parameters = constructor.getParameters();
                     Object[] list_of_param = new Object[parameters.length]; 
                     for (int i = 0; i < parameters.length; i++) {
-                        list_of_param[i] = parameters[i].getType().newInstance();
+                        
+                        Class class_name = parameters[i].getType();
+
+                        if (objectsInstances.containsKey(class_name)) {
+                            list_of_param[i] = objectsInstances.get(class_name);
+                        } else {
+                            list_of_param[i] = class_name.newInstance();
+                        }
+
                     }
                     set_in_list_object = (T) constructor.newInstance(
                         list_of_param
@@ -69,7 +77,7 @@ public class DummyBinder implements Binder {
                 }
             }
             
-            if (test_singleton || test_inject) {
+            if (test_singleton) {
                 objectsInstances.put(
                     clazz,
                     set_in_list_object
@@ -81,21 +89,21 @@ public class DummyBinder implements Binder {
                 );
             }
 
-        }
-        catch (Exception ie) {
+        } catch (Exception ie) {
             System.out.println(ie);
-            System.out.println("!!SHiiiiittt_ 2222222222");
+            System.out.println("!!error 2222");
         }
     }
 
     @Override
     public <T> void bind(Class<T> clazz, Class<? extends T> implementation) {
 
-        changedDependencies.put(
-            clazz,
-            implementation
-        );
-
+        if (objectsInstances.containsKey(implementation)) {
+            objectsInstances.put(
+                clazz,
+                objectsInstances.get(implementation)
+            );
+        }
     }
 
     @Override
