@@ -14,35 +14,33 @@ public class Example {
 
     @Before
     public void setUp() {
-        // Environment env = new DummyEnvironment();
-        // container = env.configure(new MyConfiguration());
+        Environment env = new DummyEnvironment();
+        container = env.configure(new MyConfiguration());
         
     }
 
     @Test
     public void shouldInjectSingleton() {
-        Environment env = new DummyEnvironment();
-        container = env.configure(new MyConfiguration());
-        // assertSame(container.getComponent(B.class),container.getComponent(B.class));
-        // assertSame(container.getComponent(MySingleton.class), container.getComponent(MySingleton.class));
+        assertSame(container.getComponent(B.class),container.getComponent(B.class));
+        assertSame(container.getComponent(MySingleton.class), container.getComponent(MySingleton.class));
     }
 
-    // @Test
-    // public void shouldInjectPrototype() {
-    //     // System.out.println(container.getComponent(MyPrototype.class));
-    //     assertNotSame(container.getComponent(MyPrototype.class), container.getComponent(MyPrototype.class));
-    // }
+    @Test
+    public void shouldInjectPrototype() {
+        // System.out.println(container.getComponent(MyPrototype.class));
+        assertNotSame(container.getComponent(MyPrototype.class), container.getComponent(MyPrototype.class));
+    }
 
-    // @Test
-    // public void shouldBuildInjectionGraph() {
-    //     /*
-    //     binder.bind(A.class, B.class);
-    //     binder.bind(B.class, new B());
-    //     */
-    //     final B bAsSingleton = container.getComponent(B.class);
-    //     assertSame(container.getComponent(A.class), bAsSingleton);
-    //     assertSame(container.getComponent(B.class), bAsSingleton);
-    // }
+    @Test
+    public void shouldBuildInjectionGraph() {
+        /*
+        binder.bind(A.class, B.class);
+        binder.bind(B.class, new B());
+        */
+        final B bAsSingleton = container.getComponent(B.class);
+        assertSame(container.getComponent(A.class), bAsSingleton);
+        assertSame(container.getComponent(B.class), bAsSingleton);
+    }
 
     // @Test
     // public void shouldBuildInjectDependencies() {

@@ -5,6 +5,7 @@ import org.fpm.di.Binder;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 import javax.inject.Singleton;
 import javax.inject.Inject;
@@ -40,39 +41,31 @@ public class DummyBinder implements Binder {
 
         try {
             T set_in_list_object = null;
-            // T set_in_list_object = (T) clazz.newInstance();
+
             Constructor<?>[] constructors = clazz.getConstructors();
             for (Constructor<?> constructor : constructors) {
-                System.out.println("Constructor: " + constructor.getName());
-
-                // Получение параметров конструктора
                 Parameter[] parameters = constructor.getParameters();
+                Object[] list_of_param = new Object[parameters.length]; 
 
-                for (Parameter parameter : parameters) {
-                    System.out.println("Parameter: " + parameter.getName());
-                    System.out.println("Type: " + parameter.getType());
-                    
+                for (int i = 0; i < parameters.length; i++) {
+                    list_of_param[i] = parameters[i].getType().newInstance();
                 }
-                // set_in_list_object = (T) parameter.getType().newInstance();
-                System.out.println("-----");
+
+                set_in_list_object = (T) constructor.newInstance(
+                    list_of_param
+                );
             }
-
-            // T set_in_list_object = (T) clazz.newInstance();
-
+            if (set_in_list_object == null) {
+                set_in_list_object = (T) clazz.newInstance();
+            }
+            
             boolean test_singleton = false;
-
             for(Annotation annotation : clazz.getDeclaredAnnotations() ) {
                 if(annotation.annotationType() == Singleton.class) {
                     test_singleton = true;
                 }
-                // objectsInstances.put(
-                //     clazz,
-                //     set_in_list_object
-                // );
-
             }
             
-
             if (test_singleton) {
                 objectsInstances.put(
                     clazz,
@@ -85,14 +78,11 @@ public class DummyBinder implements Binder {
                 );
             }
 
-
         }
         catch (Exception ie) {
             System.out.println(ie);
             System.out.println("!!SHiiiiittt_ 2222222222");
-
-        } 
-
+        }
     }
 
     @Override
